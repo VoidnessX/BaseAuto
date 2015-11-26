@@ -1,0 +1,611 @@
+1회 초
+1번타자 이용규
+
+Event 볼 by 이용규
+Event 파울 by 이용규
+Event 파울 by 이용규
+Event 볼 by 이용규
+Event 볼 by 이용규
+Event 볼 by 이용규
+Event base on balls : 이용규 bob
+
+2번타자 정근우
+
+Event 볼 by 정근우
+Event Out : 정근우 out
+Event Out : 이용규 out
+
+3번타자 최진행
+
+Event 헛스윙 by 최진행
+Event 볼 by 최진행
+Event 헛스윙 by 최진행
+Event 볼 by 최진행
+Event 스트라이크 by 최진행
+Event Out : 최진행 out
+
+Event team change : home -> away 
+
+1회 말
+1번타자 강한울
+
+Event 스트라이크 by 강한울
+Event 볼 by 강한울
+Event 볼 by 강한울
+Event 볼 by 강한울
+Event Out : 강한울 out
+
+2번타자 박기남
+
+Event 볼 by 박기남
+Event 볼 by 박기남
+Event 스트라이크 by 박기남
+Event Out : 박기남 out
+
+3번타자 필
+
+Event 볼 by 필
+Event 스트라이크 by 필
+Event Out : 필 out
+
+Event team change : away -> home 
+
+2회 초
+4번타자 김태균
+
+Event 볼 by 김태균
+Event 스트라이크 by 김태균
+Event 볼 by 김태균
+Event 파울 by 김태균
+Event 파울 by 김태균
+Event Out : 김태균 out
+
+5번타자 김경언
+
+Event 스트라이크 by 김경언
+Event 볼 by 김경언
+Event 볼 by 김경언
+Event 볼 by 김경언
+Event 볼 by 김경언
+Event base on balls : 김경언 bob
+
+6번타자 김회성
+
+Event 파울 by 김회성
+Event 헛스윙 by 김회성
+Event Out : 김경언 out
+Event 파울 by 김회성
+Event 볼 by 김회성
+Event hit : 2루타 by 김회성
+
+7번타자 정범모
+
+Event 볼 by 정범모
+Event 파울 by 정범모
+Event Out : 정범모 out
+
+Event team change : home -> away 
+
+2회 말
+4번타자 최희섭
+
+Event 스트라이크 by 최희섭
+Event Out : 최희섭 out
+
+5번타자 이범호
+
+Event 볼 by 이범호
+Event 스트라이크 by 이범호
+Event 파울 by 이범호
+Event 파울 by 이범호
+Event hit : 1루타 by 이범호
+
+6번타자 김다원
+
+Event 볼 by 김다원
+Event 헛스윙 by 김다원
+Event 스트라이크 by 김다원
+Event walk : 김다원 walk
+Event Out : 이범호 out
+
+7번타자 김호령
+
+Event 스트라이크 by 김호령
+Event 스트라이크 by 김호령
+Event 볼 by 김호령
+Event 볼 by 김호령
+Event 볼 by 김호령
+Event 파울 by 김호령
+Event 볼 by 김호령
+Event base on balls : 김호령 bob
+Event walk : 김다원 walk
+
+8번타자 차일목
+
+Event 스트라이크 by 차일목
+Event 스트라이크 by 차일목
+Event 헛스윙 by 차일목
+Event Out : 차일목 out
+
+Event team change : away -> home 
+
+3회 초
+8번타자 권용관
+
+Event 볼 by 권용관
+Event Out : 권용관 out
+
+9번타자 송주호
+
+Event 스트라이크 by 송주호
+Event Out : 송주호 out
+
+1번타자 이용규
+
+Event 스트라이크 by 이용규
+Event Out : 이용규 out
+
+Event team change : home -> away 
+
+3회 말
+9번타자 이호신
+
+Event 파울 by 이호신
+Event 스트라이크 by 이호신
+Event Out : 이호신 out
+
+1번타자 강한울
+
+Event 스트라이크 by 강한울
+Event 볼 by 강한울
+Event 스트라이크 by 강한울
+Event Out : 강한울 out
+
+2번타자 박기남
+
+Event 볼 by 박기남
+Event 볼 by 박기남
+Event 볼 by 박기남
+Event 스트라이크 by 박기남
+Event 볼 by 박기남
+Event base on balls : 박기남 bob
+
+3번타자 필
+
+Event 스트라이크 by 필
+Event 파울 by 필
+Event 볼 by 필
+Event 파울 by 필
+Event 파울 by 필
+Event Out : 필 out
+
+Event team change : away -> home 
+
+4회 초
+2번타자 정근우
+
+Event 스트라이크 by 정근우
+Event hit : 2루타 by 정근우
+
+3번타자 최진행
+
+Event Out : 최진행 out
+Event walk : 정근우 walk
+
+4번타자 김태균
+
+Event 볼 by 김태균
+Event 볼 by 김태균
+Event 볼 by 김태균
+Event 볼 by 김태균
+Event base on balls : 김태균 bob
+
+5번타자 김경언
+
+Event 볼 by 김경언
+Event 파울 by 김경언
+Event 파울 by 김경언
+Event 파울 by 김경언
+Event 파울 by 김경언
+Event walk : 김경언 walk
+Event Out : 김태균 out
+Event score : 정근우 to home
+
+6번타자 김회성
+
+Event 볼 by 김회성
+Event Homerun : 김회성
+Event score : 김경언 to home
+
+7번타자 정범모
+
+Event 파울 by 정범모
+Event 스트라이크 by 정범모
+Event 파울 by 정범모
+Event 파울 by 정범모
+Event 스트라이크 by 정범모
+Event Out : 정범모 out
+
+Event team change : home -> away 
+
+4회 말
+4번타자 최희섭
+
+Event 볼 by 최희섭
+Event 파울 by 최희섭
+Event Out : 최희섭 out
+
+5번타자 이범호
+
+Event 스트라이크 by 이범호
+Event 파울 by 이범호
+Event 볼 by 이범호
+Event 볼 by 이범호
+Event Out : 이범호 out
+
+6번타자 김다원
+
+Event 스트라이크 by 김다원
+Event 볼 by 김다원
+Event 헛스윙 by 김다원
+Event 파울 by 김다원
+Event 볼 by 김다원
+Event 헛스윙 by 김다원
+Event Out : 김다원 out
+
+Event team change : away -> home 
+
+5회 초
+8번타자 권용관
+
+Event 볼 by 권용관
+Event 볼 by 권용관
+Event 스트라이크 by 권용관
+Event 스트라이크 by 권용관
+Event 볼 by 권용관
+Event Out : 권용관 out
+
+9번타자 송주호
+
+Event 볼 by 송주호
+Event hit : 1루타 by 송주호
+
+1번타자 이용규
+
+Event 스트라이크 by 이용규
+Event 파울 by 이용규
+Event 볼 by 이용규
+Event 스트라이크 by 이용규
+Event Out : 이용규 out
+
+2번타자 정근우
+
+Event 볼 by 정근우
+Event 파울 by 정근우
+Event 볼 by 정근우
+Event 볼 by 정근우
+Event 스트라이크 by 정근우
+Event 볼 by 정근우
+Event base on balls : 정근우 bob
+Event walk : 송주호 walk
+
+3번타자 최진행
+
+Event 파울 by 최진행
+Event 볼 by 최진행
+Event walk : 정근우 walk
+Event walk : 송주호 walk
+Event 볼 by 최진행
+Event 볼 by 최진행
+Event Out : 최진행 out
+
+Event team change : home -> away 
+
+5회 말
+7번타자 김호령
+
+Event 스트라이크 by 김호령
+Event 헛스윙 by 김호령
+Event 스트라이크 by 김호령
+Event Out : 김호령 out
+
+8번타자 차일목
+
+Event 스트라이크 by 차일목
+Event 파울 by 차일목
+Event 볼 by 차일목
+Event hit : 1루타 by 차일목
+
+9번타자 이호신
+
+Event 볼 by 이호신
+Event 스트라이크 by 이호신
+Event 볼 by 이호신
+Event 파울 by 이호신
+Event walk : 이호신 walk
+Event Out : 차일목 out
+
+1번타자 강한울
+
+Event 스트라이크 by 강한울
+Event 스트라이크 by 강한울
+Event Out : 강한울 out
+
+Event team change : away -> home 
+
+6회 초
+4번타자 김태균
+
+Event 볼 by 김태균
+Event 파울 by 김태균
+Event Out : 김태균 out
+
+5번타자 김경언
+
+Event 스트라이크 by 김경언
+Event 스트라이크 by 김경언
+Event 볼 by 김경언
+Event 볼 by 김경언
+Event Out : 김경언 out
+
+6번타자 김회성
+
+Event 볼 by 김회성
+Event 스트라이크 by 김회성
+Event 볼 by 김회성
+Event Out : 김회성 out
+
+Event team change : home -> away 
+
+6회 말
+2번타자 박기남
+
+Event 파울 by 박기남
+Event 볼 by 박기남
+Event 볼 by 박기남
+Event 볼 by 박기남
+Event 헛스윙 by 박기남
+Event 스트라이크 by 박기남
+Event Out : 박기남 out
+
+3번타자 필
+
+Event 파울 by 필
+Event 볼 by 필
+Event 볼 by 필
+Event 볼 by 필
+Event 볼 by 필
+Event base on balls : 필 bob
+
+4번타자 최희섭
+
+Event change : 안영명 to 박정진
+Event 스트라이크 by 최희섭
+Event Out : 최희섭 out
+Event Out : 필 out
+
+Event team change : away -> home 
+
+7회 초
+7번타자 정범모
+
+Event 볼 by 정범모
+Event 볼 by 정범모
+Event 스트라이크 by 정범모
+Event 파울 by 정범모
+Event 파울 by 정범모
+Event 볼 by 정범모
+Event 헛스윙 by 정범모
+Event Out : 정범모 out
+
+8번타자 권용관
+
+Event 볼 by 권용관
+Event 스트라이크 by 권용관
+Event hit : 1루타 by 권용관
+
+9번타자 송주호
+
+Event 헛스윙 by 송주호
+Event 볼 by 송주호
+Event walk : 권용관 walk
+Event 번트파울 by 송주호
+Event 스트라이크 by 송주호
+Event Out : 송주호 out
+
+1번타자 이용규
+
+Event 볼 by 이용규
+Event Hit but probably out : 이용규
+Event walk : 이용규 walk
+Event walk : 권용관 walk
+Event score : 권용관 to home
+
+2번타자 정근우
+
+Event change : 양현종 to 박준표
+Event 스트라이크 by 정근우
+Event 볼 by 정근우
+Event Out : 정근우 out
+
+Event team change : home -> away 
+
+7회 말
+5번타자 이범호
+
+Event 볼 by 이범호
+Event hit : 1루타 by 이범호
+
+6번타자 김다원
+
+Event 볼 by 김다원
+Event 헛스윙 by 김다원
+Event 볼 by 김다원
+Event Out : 김다원 out
+
+7번타자 김호령
+
+Event 헛스윙 by 김호령
+Event Out : 김호령 out
+Event Out : 이범호 out
+
+Event team change : away -> home 
+
+8회 초
+3번타자 최진행
+
+Event 스트라이크 by 최진행
+Event 파울 by 최진행
+Event 헛스윙 by 최진행
+Event Out : 최진행 out
+
+4번타자 김태균
+
+Event 스트라이크 by 김태균
+Event 파울 by 김태균
+Event 스트라이크 by 김태균
+Event Out : 김태균 out
+
+5번타자 김경언
+
+Event change : 박준표 to 임준섭
+Event 스트라이크 by 김경언
+Event 헛스윙 by 김경언
+Event 볼 by 김경언
+Event Out : 김경언 out
+
+Event team change : home -> away 
+
+8회 말
+8번타자 차일목
+
+Event change : 박정진 to 권혁
+
+8번타자 차일목 
+
+Event pinch hitter : 차일목 to 나지완
+Event 볼 by 교체
+Event 볼 by 교체
+Event 볼 by 교체
+Event 스트라이크 by 교체
+Event 헛스윙 by 교체
+Event Out : 나지완 out
+
+9번타자 이호신 
+
+Event pinch hitter : 이호신 to 최용규
+Event 볼 by 교체
+Event 헛스윙 by 교체
+Event 볼 by 교체
+Event 스트라이크 by 교체
+Event 스트라이크 by 교체
+Event Out : 최용규 out
+
+1번타자 강한울 
+
+Event pinch hitter : 강한울 to 이홍구
+Event 파울 by 교체
+Event 파울 by 교체
+Event 볼 by 교체
+Event 볼 by 교체
+Event 볼 by 교체
+Event Out : 이홍구 out
+
+Event team change : away -> home 
+
+9회 초
+6번타자 김회성
+
+Event pos change : 이홍구 to pos  포수
+Event pos change : 박기남 to pos  유격수
+Event pos change : 나지완 to pos  우익수
+Event pos change : 최용규 to pos  2루수
+Event 볼 by 김회성
+Event 스트라이크 by 김회성
+Event 볼 by 김회성
+Event 볼 by 김회성
+Event 파울 by 김회성
+Event 볼 by 김회성
+Event base on balls : 김회성 bob
+
+7번타자 정범모
+
+Event walk : 정범모 walk
+Event walk : 김회성 walk
+
+8번타자 권용관
+
+Event 번트파울 by 권용관
+Event 번트파울 by 권용관
+Event 볼 by 권용관
+Event 번트파울 by 권용관
+Event Out : 권용관 out
+
+9번타자 송주호
+
+Event 파울 by 송주호
+Event 스트라이크 by 송주호
+Event 파울 by 송주호
+Event 볼 by 송주호
+Event 볼 by 송주호
+Event hit : 1루타 by 송주호
+Event walk : 정범모 walk
+Event walk : 김회성 walk
+
+1번타자 이용규
+
+Event 헛스윙 by 이용규
+Event 볼 by 이용규
+Event 파울 by 이용규
+Event 볼 by 이용규
+Event Out : 이용규 out
+Event walk : 송주호 walk
+Event walk : 정범모 walk
+Event score : 김회성 to home
+
+2번타자 정근우
+
+Event 볼 by 정근우
+Event 스트라이크 by 정근우
+Event 볼 by 정근우
+Event hit : 1루타 by 정근우
+Event walk : 송주호 walk
+Event score : 정범모 to home
+
+3번타자 최진행 
+
+Event pinch hitter : 최진행 to 김태완
+Event 볼 by 교체
+Event 스트라이크 by 교체
+Event 스트라이크 by 교체
+Event 헛스윙 by 교체
+Event Out : 김태완 out
+
+Event team change : home -> away 
+
+9회 말
+2번타자 박기남
+
+Event pos change : 김태완 to pos  지명타자
+Event 헛스윙 by 박기남
+Event 볼 by 박기남
+Event 파울 by 박기남
+Event 스트라이크 by 박기남
+Event Out : 박기남 out
+
+3번타자 필
+
+Event 볼 by 필
+Event 스트라이크 by 필
+Event 파울 by 필
+Event Out : 필 out
+
+4번타자 최희섭 
+
+Event pinch hitter : 최희섭 to 이인행
+Event 스트라이크 by 교체
+Event 스트라이크 by 교체
+Event 파울 by 교체
+Event 헛스윙 by 교체
+Event Out : 이인행 out
+

@@ -1,0 +1,13 @@
+7/18 eventClass.py 
+
+변수 명 단순화 
+event class 다 만들었음 
+각 event handler 함수 짜는 중 
+
+8/4 crawlTextRelay.py 
+
+크롤러 짜기. KBO에서 구종 긁어올 것 하나 더 필요. 
+eventclass 보충할 필요/시험해볼 필요 있음. 
+
+트레이드 된 선수들 변경해야 할 필요 있음. (7월 말...) 
+

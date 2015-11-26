@@ -1,0 +1,259 @@
+#-*- coding: utf-8 -*-
+import os, sys, re
+from eventClass import *
+
+
+
+# for unicode setting
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+#---------------------------------------------------------------
+# evalState function 
+#---------------------------------------------------------------
+
+
+'''
+Common for event handler functions
+	
+handler_func : Event State (might have more inputs) -> State 
+	all handler_func is for evaluating next state. 
+	event : class Event. 
+	before : class State for state before event happens.
+	res : state after event happens. 
+'''
+
+'''
+Few notes about implementation
+
+- Next hitter issue
+Note that all hitter change is done by event pinchHitter or hitterChange, so before_state for other classes should already have next hitter before actuall event happens.
+- Score evaluation issue
+No exact calculation on score is now available. Need to be implemented. Escpecially when score is made in case of teamChange, it should be handled carefully.  
+- teamChange issue
+teamChange function requires state of each team. Therefore, inside the function, initial OffenseTeam/DefenseTeam should be saved for both home and away team. When players change with team change, this should be handled with teamChange function plus necessary playerChange functions. 
+- event duplication
+singlehit, doublehit, ... have duplicate function implementation. 
+'''
+
+'''
+hit_handler : Event State -> State
+	handler function for hitted events. 
+'''
+
+def hit_handler(event, before):
+	offense_before = before.offense_team
+	offense_after = event.offense_result.evalOffenseTeam(offense_before)
+	defense_after = before.defense_team
+	ball_after = before.ball
+	# out_after should be less than 3
+	out_after = event.offense_result.evalOutCnt() + before.out
+	if out_after >= 3 :
+		return 
+	strike_after = before.strike
+	turn_after = before.turn
+	score_after = before.score
+	# divide case - if home is offense/away is offense
+	if before.is_home == True: # if home is offense
+		score_after[0] += event.offense_result.evalScore()
+	else: # if away is offense
+		score_after[1] += event.offense_result.evalScore() 
+	is_home_after = before.is_home
+	
+	return State(offense_after.getPlayerLst(), 
+				 defense_after.getPlayerLst(),
+				 ball_after, 
+				 out_after, 
+				 strike_after, 
+				 turn_after, 
+				 score_after, 
+				 is_home_after)
+
+
+# might need slight modification
+def error(event, before):
+	pass
+
+# it is also very similar to singleHit... should be checked.	
+def out_handler(event, before):
+	offense_before = before.offense_team
+	offense_after = event.offense_result.evalOffenseTeam(offense_before)
+	defense_after = before.defense_team
+	ball_after = before.ball
+	
+	# should be handled in case of more than 3 out
+	out_after = event.offense_result.evalOutCnt() + before.out 
+	
+	strike_after = before.strike
+	turn_after = before.turn
+	score_after = before.score
+	# divide case - if home is offense/away is offense
+	if before.is_home == True: # if home is offense
+		score_after[0] += event.offense_result.evalScore()
+	else: # if away is offense
+		score_after[1] += event.offense_result.evalScore() 
+	is_home_after = before.is_home
+	
+	return State(offense_after.getPlayerLst(), 
+				 defense_after.getPlayerLst(),
+				 ball_after, 
+				 out_after, 
+				 strike_after, 
+				 turn_after, 
+				 score_after, 
+				 is_home_after)
+				 
+				 
+def strike_handler(event, before):
+	offense_before = before.offense_team
+	offense_after = event.offense_result.evalOffenseTeam(offense_before)
+	defense_after = before.defense_team
+	ball_after = before.ball
+	
+	# should be handled in case of more than 3 out
+	out_after = event.offense_result.evalOutCnt() + before.out 
+	
+	strike_after = before.strike + 1
+	# strike out 
+	if strike_after == 3:
+		out_after = event.offense_result.evalOutCnt() + 1 
+	
+	turn_after = before.turn
+	score_after = before.score
+	is_home_after = before.is_home
+	
+	return State(offense_after.getPlayerLst(), 
+				 defense_after.getPlayerLst(),
+				 ball_after, 
+				 out_after, 
+				 strike_after, 
+				 turn_after, 
+				 score_after, 
+				 is_home_after)
+
+				 
+def ball_handler(event, before):
+	offense_before = before.offense_team
+	offense_after = event.offense_result.evalOffenseTeam(offense_before)
+	defense_after = before.defense_team
+	ball_after = before.ball + 1
+	out_after =  before.out 
+	strike_after = before.strike
+	
+	turn_after = before.turn
+	score_after = before.score
+	is_home_after = before.is_home
+	
+	return State(offense_after.getPlayerLst(), 
+				 defense_after.getPlayerLst(),
+				 ball_after, 
+				 out_after, 
+				 strike_after, 
+				 turn_after, 
+				 score_after, 
+				 is_home_after)
+				 
+
+# walk : go to first base by 4ball
+def walk_handler(event, before):
+	pass
+	
+# wildpitch 
+def wildPitch(event, before):
+	pass
+	
+# deadball 
+def hitByPitch(event, before):
+	pass
+	
+# 4ball 
+def baseOnBalls(event, before):
+	pass
+
+# steal 
+def steal_handler(event, before):
+	pass
+	
+	
+
+def safe(event, before):
+	pass
+def caughtSteal(event, before):
+	pass
+def doubleSteal(event, before):
+	pass
+	
+# balk 
+def balk(event, before):
+	pass
+
+# handlers for player change of any sort
+def pinchHitter(event, before_state):
+	pass
+def pinchRunner(event, before_state):
+	pass
+	
+def pitcherChange(event, before_state):
+	pass
+def fielderChange(event, before_state):
+	pass
+def teamChange(event, before_state):
+	pass
+def hitterChange(event, before):	
+	pass
+	
+# handlers for exceptional cases	
+def benchClear(event, before_state):
+	pass
+def penalty(event, before_state):
+	pass
+def benchChange(event, before_state):
+	pass
+def hitInference(event, before_state):
+	pass
+	
+# handler functions end 
+
+def evalState(event, before):
+	func_dict = { hit_handler : ["single", "double", "triple", "homerun", "foul",], 
+				  out_handler : ["singleout", "doubleplay", "tripleplay", ],
+				}
+	# should handle 3out change
+
+'''		
+def evalState(event, before_state):
+	func_dict = {"single" : singleHit, 
+				 "double" : doubleHit, 
+				 "triple" : tripleHit, 
+				 "homerun" : homerun, 
+				 "error" : error, 
+				 "foul" : foul, 
+				 "singleout" : singleOut, 
+				 "doubleplay" : doublePlay, 
+				 "tripleplay" : triplePlay, 
+				 "sacrificebunt" : sacrificeBunt, 
+				 "sacrificefly" : sacrificeFly, 
+				 "swing" : swing, 
+				 "strikeout" : strikeOut, 
+				 "wildpitch" : wildPitch, 
+				 "hitbypicth" : hitByPitch, 
+				 "baseonballs" : baseOnBalls, 
+				 "safe" : safe, 
+				 "caughtsteal" : caughtSteal, 
+				 "doubleSteal" : doubleSteal, 
+				 "balk" : balk, 
+				 "pinchhitter" : pinchHitter, 
+				 "pinchRunner" : pinchRunner, 
+				 "pitcherchange" : pitcherChange, 
+				 "fielderchange" : fielderChange, 
+				 "benchclear" : benchClear, 
+				 "penalty" : penalty, 
+				 "teamchange" : teamChange, 
+				 "benchchange" : benchChange, # class not implemented
+				 "hitinference" : hitInference, # class not implemented
+				 "hitterchange" : hitterChange, # class not implemented
+				}
+	
+	
+	return FUNC_DICT[event.event_name.split("\n")[-1]](event, before_state)
+'''	

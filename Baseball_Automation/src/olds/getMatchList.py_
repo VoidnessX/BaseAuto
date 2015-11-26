@@ -1,0 +1,108 @@
+#-*- coding: utf-8 -*-
+import os, sys
+import urllib
+import re 
+from bs4 import BeautifulSoup as bs 
+
+
+# for unicode setting
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+print "Begin crawling data."
+
+# basic html crawling function 
+def get_page(url):
+    return urllib.urlopen(url).read()
+
+	
+# target urls
+leagueInfo = "http://sports.news.naver.com/schedule/index.nhn?category=kbo"
+
+# should be changed to regular expression 
+# get season number(id) and return soup_list
+def getSoupList():
+	pass
+
+# soup_list manually made for 2015 season
+soup_list = [
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=03&teamCode=&date=20150504", 
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=04&teamCode=&date=20150504", 
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=05&teamCode=&date=20150504", 
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=06&teamCode=&date=20150504", 
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=07&teamCode=&date=20150504", 
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=08&teamCode=&date=20150504", 
+"http://sports.news.naver.com/schedule/index.nhn?uCategory=&category=kbo&year=2015&month=09&teamCode=&date=20150504", 
+]
+
+print "Season informations are from following url."
+for elem in soup_list:
+	print elem
+
+
+'''
+League information crawling
+matchList, teamList
+'''
+
+
+# template page for getting team information
+soup = bs(get_page(leagueInfo))
+
+raw_team = soup.find_all('div', {'class', 'tab_team'})[0].find_all('a')
+
+# list of teams
+teamList = [elem.contents[0] for elem in raw_team[1:]]  
+
+
+
+# list of matches
+class Match():
+	def __init__(self, home, away, date):
+		self.home = home
+		self.away = away
+		self.date = date
+		self.isCanceled = False 
+		
+	def setCanceled(self):
+		self.isCanceled = True
+
+	def __unicode__(self):
+		return self.home + " : " + self.away + " at " + self.date 
+score_lst = []
+# for league information url		
+def getMatchList(sp):
+	raw_match = sp.find_all('div', {'class', 'sch_tb', r'sch_tb2'})
+
+	matchList = []
+
+	for elem in raw_match:
+		date = elem.find_all('span', {'class', 'td_date'})[0].text
+		print date
+
+		for idx, lft in enumerate(elem.find_all('span', {'class', 'team_lft'})):
+			lft = lft.text
+			rgt = elem.find_all('span', {'class', 'team_rgt'})[0].text
+			print lft, rgt
+			matchList.append(Match(lft, rgt, date))
+		
+
+
+	return matchList
+	
+
+	
+# matchList contains all match for the given season. 
+# matchList should be about 750~800 matches per season. 
+	
+matchList = []
+for url in soup_list:
+	matchList.extend(getMatchList(bs(get_page(url))))
+
+
+
+print "Number of matches : %d"%len(matchList)
+
+
+
+

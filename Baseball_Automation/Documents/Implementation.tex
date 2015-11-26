@@ -1,0 +1,214 @@
+\documentclass[twoside]{article}
+
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{braket}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{adjustbox}
+\usepackage{kotex}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+%\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\setcounter{section}{-1}
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{ BA101 Baseball Article Writing} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\vspace*{3cm}
+\textsc{\Large BA101}\\[0.5cm] % Major heading such as course name
+\textsc{\large Baseball Article Writing}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Baseball Automation - Details}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+신승우, 김동현 \\ 
+김용현, 이경수 
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Typeset by:} \\
+신승우
+\end{flushright}
+\end{minipage}\\[4cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+\textsc{Team NoName}\\[1.5cm] % Name of your university/college
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+%\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+% Table of contents 
+
+\tableofcontents
+\newpage
+
+
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+\section{Introduction}
+
+본 서류는 야구 자동작성 프로젝트에 쓰이는 소스 코드에 대한 내용을 담고 있다. 프로젝트의 모든 내용은 root 디렉토리 안에 있으며, 디렉토리는 다음과 같은 트리구조로 되어 있다. 
+
+\begin{compactitem}
+\item backup : 백업 파일. 소스 파일을 백업한다. 
+\item documents : 관련 서류를 저장하는 폴더. 
+\item etc : 기타 연습용 코드 등을 저장. 프로젝트가 끝난 후 지울 것. 
+\item raw : 긁어온 raw data들을 담고 있다. 
+\item result : 긁어온 자료를 프로세싱한 결과를 담고 있다. 
+\item src : 소스 파일들을 저장하는 폴더. 
+\end{compactitem}
+
+소스 코드는 아래의 5가지로 나뉘어진다. \footnote{필요한 그림들을 그려서 넣을 필요가 있음.}
+
+\begin{compactitem}
+\item 크롤러 : 각종 사이트에서 필요한 정보를 긁어온다. 
+\item 야구 시뮬레이터 : 야구 경기를 프로그램 내에서 시뮬레이트하여 이벤트를 추출한다. 
+\item 자연어처리 부분 : 기사에서 필요한 정보를 추출하거나, 만들어낸 이벤트를 이용해서 기사를 만들어낸다.
+\item 기계학습 : 기사에 쓸 이벤트를 추출하는 classfier를 만든다.
+\item 기타 : 여러 정보를 처리하거나, 실행 자동화를 위한 부분을 담고 있다.  
+\end{compactitem}
+
+\section{Source Code Details}
+
+\subsection{Crawler}
+
+크롤러는 크게 2개가 있다. 야구 기사들을 긁어와서 저장하는 crawlLeagueInfo.py와 문자중계를 긁어오는 crawlTextRelay.py이다.\footnote{KBO에서 구질, 구속을 긁어오는 것 역시 필요하다. 아직 구현되지 않았으나 구현 필요.} 
+
+\subsubsection{Article Crawler}
+
+야구 기사 읽어오기. 
+
+\subsubsection{Text Broadcasting Crawler}
+
+문자중계 읽어오기.
+
+\subsection{Simulator}
+
+야구 시뮬레이션은 event 단위로 이루어진다. 이는 곧
+
+\subsection{NLP handling}
+
+기사를 읽어오는 것과 기사를 쓰는 것으로 나누어진다. 
+
+\subsection{Etc}  
+
+몇 가지 기타 사항들. 
+
+
+
+\end{document}
+
+
+
+
+
+
+
+

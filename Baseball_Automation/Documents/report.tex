@@ -1,0 +1,351 @@
+\documentclass[twoside]{article}
+
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{multirow}
+\usepackage{braket}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{adjustbox}
+\usepackage{datetime}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{kotex}
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{ 2015 Summer Project} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{Automatic Generation of Baseball Articles  }} % Article title
+
+\author{
+\large
+\textsc{김동현, 김용현, 신승우, 이경수}\\[2mm]
+%\textsc{Seungwoo Schin}\\[2mm]
+\normalsize Team Noname \\ % Your institution
+\vspace{-5mm}
+}
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Insert title
+
+\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+
+
+\section{Main Objective}
+
+야구 경기 기록에서 야구 기사를 자동으로 작성하는 코드를 짜는 것. 
+야구 경기 기록은 kbo 홈페이지\footnote{http://www.koreabaseball.com/Schedule/GameList/General.aspx}와 네이버 문자중 계 에서 얻어온다.  
+
+\section{General Structure}
+
+\subsection{Pipeline of Program}
+
+\begin{enumerate}
+\item 데이터 수집 
+
+웹 크롤링을 통해서 기존 야구 경기의 기록과 관련 기사를 수집한다. 
+
+\item 학습 
+
+경기의 기록을 분석해서 어떤 부분이 기사에 주로 나오는지를 학습한다. 
+
+\item 기사 작성 
+
+기사에 나올 부분을 자연어처리를 통해서 기사로 만들어낸다. 
+
+\end{enumerate}
+
+\subsection{Program Structure}
+
+
+\subsubsection{경기 구조}
+
+야구 경기는 1구마다, 혹은 교체 등의 예외적인 상황마다 state가 변한다. 이 state가 변하는 과정을 event라고 한다. 따라서 야구 경기는 state들이 변화하는 과정이다. 맨 처음 state는 선발 라인업을 반영해야 하고, 그 이후로는 일어난 event에 따라서 state가 바뀌게 된다. 이 과정을 track함으로써 야구 경기에서 일어난 일을 재현할 수 있다.
+
+State는 다음의 정보를 담고 있다. 
+\begin{compactitem}
+\item Offense/Defencse Team : 공/수 팀의 포지션별 선수 목록
+\item ball, out, strike : 각각 볼, 아웃, 스트라이크 카운트
+\item turn, is\_home : 회차와 초/말. 
+\end{compactitem}
+
+Event의 종류는 아래와 같이 분류된다. 
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\caption{Event class}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\multirow{11}{*}{hitted}    & \multirow{10}{*}{fair}  & \multirow{5}{*}{hit} & single         & 1루타 \\ \cline{4-5} 
+                            &                         &                      & double         & 2루타   \\ \cline{4-5} 
+                            &                         &                      & triple         & 3루타   \\ \cline{4-5} 
+                            &                         &                      & homerun        & 홈런    \\ \cline{4-5} 
+                            &                         &                      & error          & 실책    \\ \cline{3-5} 
+                            &                         & \multirow{5}{*}{out} & singleout      & 아웃    \\ \cline{4-5} 
+                            &                         &                      & doubleplay     & 병살    \\ \cline{4-5} 
+                            &                         &                      & tripleplay     & 삼중살    \\ \cline{4-5} 
+                            &                         &                      & sacrifice fly  & 희생 플라이    \\ \cline{4-5} 
+                            &                         &                      & sacrifice bunt & 희생 번트    \\ \cline{2-5} 
+                            & \multicolumn{3}{l|}{foul}                                       &  파울   \\ \hline
+\multirow{7}{*}{Non-hitted} & \multirow{3}{*}{strike} & \multicolumn{2}{l|}{strike}           &  스트라이크   \\ \cline{3-5} 
+                            &                         & \multicolumn{2}{l|}{swing}            &   헛스윙  \\ \cline{3-5} 
+                            &                         & \multicolumn{2}{l|}{strike out}       &  스트라이크 아웃  \\ \cline{2-5} 
+                            & \multirow{4}{*}{ball}   & \multicolumn{2}{l|}{ball}             &  볼   \\ \cline{3-5} 
+                            &                         & \multicolumn{2}{l|}{wildpitch}        &  폭투   \\ \cline{3-5} 
+                            &                         & \multicolumn{2}{l|}{hit by pitch}     &  데드볼   \\ \cline{3-5} 
+                            &                         & \multicolumn{2}{l|}{base on balls}    &  사구   \\ \hline
+\multirow{3}{*}{steal}      & \multicolumn{3}{l|}{safe}                                       &  스틸 성공  \\ \cline{2-5} 
+							& \multicolumn{3}{l|}{double steal}								  &  더블스틸 \\ \cline{2-5}
+                            & \multicolumn{3}{l|}{out}                                        &  도루사    \\ \hline
+\multicolumn{4}{|l|}{balk}                                                                    &  보크   \\ \hline
+\multirow{5}{*}{change}     & \multicolumn{3}{l|}{PH}                                         &  대타   \\ \cline{2-5} 
+                            & \multicolumn{3}{l|}{PR}                                         &  대주자   \\ \cline{2-5} 
+                            & \multicolumn{3}{l|}{Pitcher Change}                             &  투수 교체   \\ \cline{2-5} 
+                            & \multicolumn{3}{l|}{Fielder Change}                             &  야수 교체   \\ \cline{2-5} 
+                            & \multicolumn{3}{l|}{Penalty}                                    &  퇴장   \\ \hline 
+\multicolumn{4}{|l|}{Team Change}                                                             &  공수 교대   \\ \hline
+\multicolumn{4}{|l|}{Bench change}                                                            &  ?   \\ \hline
+\multicolumn{4}{|l|}{Bench Clear}                                                             &  벤치 클리어   \\ \hline
+\multicolumn{4}{|l|}{hit interference}                                                        &  타격 방해   \\ \hline
+\end{tabular}
+\end{table}
+
+event가 일어날 시에 그 event에 의힌 선수들의 stat 변화량을 계산해서 기록한다. stat들은 크게 수비와 공격 stat으로 나눠서 판단한다. 
+공격 stat은 wpa를 우선 사용하며, wpa이외의 스탯은 일단 사용하지 않는다. 
+수비 스탯의 경우는 subgame의 단위로 게임을 나누어서, 각 subgame을 설명하는 지표를 아래와 같이 정한다. \footnote{스탯 정확히 정해지면 수정 요}
+
+
+\subsubsection{야구 기사}
+
+야구 기사는 경기에서 일어난 event들 중 특정 event를 기자가 취사선택하여 배열 후 서술한 것이다. 따라서 이 과정을 기계가 대신하게 하는 것으로 기사 작성을 할 수 있다. 이를 위해서는 기존 기사에서 어떤 event를 어떤 순서로 배열하여 작성한지를 알 수 있어야 한다. \footnote{이 부분에 대한 설계는 아직 정확히 진행하지 않았음. 추가 요망. } 
+
+
+\section{Details}
+
+작업 세부사항. 
+
+\subsection{Development Environment}
+ 
+\begin{compactitem}
+\item 언어 : python3, python2
+\item 필요 모듈 : BeautifulSoup4, KoNLPy(예정), Numpy/Scipy/Matplotlib(예정)
+\item remote server : 157.7.108.38
+\item 소스 버젼관리 : 미정
+\item 소스 공유 툴 : 미정\footnote{아마 github}
+\item 자료 공유 : slack, 카카오톡
+\end{compactitem}
+
+\subsection{Build Environment}
+
+\begin{compactitem}
+\item 언어 : python2
+\item 필요 모듈 : BeautifulSoup4, Selenium 
+\item 기타 설치 요 : ChromeDriver
+\end{compactitem}
+\subsection{Coding Convention} 
+기본적으로 PEP에 나와있는 사항을들 따르되, 아래 사항은 필수적으로 지킬 것. 
+
+\begin{compactitem}
+
+\item Naming
+
+\begin{compactitem}
+\item 클래스 이름 : 첫 문자 대문자. 이후 단어 단위로 대문자. ex) ExampleClass
+\item 함수 이름 : 첫 문자 소문자. 이후 단어 단위로 대문자.\footnote{Camel Notation} ex) exampleFunc
+\item 변수 이름 : 모든 문자 소문자. 단어 단위로 \_. ex)example\_var
+\item 전역 변수 : 모든 문자 대문자. 단어 단위로 \_. ex)GLOBAL\_VAR
+\end{compactitem}
+
+\item Comment
+
+모든 주석은 영어로, 아래의 형식으로 달면 됨. 
+\begin{compactitem}
+\item 클래스 
+
+\begin{lstlisting}
+'''
+class ExampleClass : class explanation
+	att1 : att1 explanation
+	att2 : att2 explanation 
+...
+
+'''
+class ExampleClass():
+	def __init__(self, att1, att2. ...):
+		....
+\end{lstlisting}
+
+\item 함수 
+
+
+\begin{lstlisting}
+'''
+exampleFunc : type(var1), type(var2), ... -> type(res1), type(res2), ...
+	function explanation 
+	var1 : var1 explanation
+	var2 : var2 explanation 
+	...
+	res1 : res1 explanation 
+	res2 : res2 explanation 
+	...
+'''
+def exampleFunc(var1, var2, ...):
+	...
+	
+\end{lstlisting}
+
+필요한 경우, 함수 내부에 local variable을 설명하는 주석을 달아주면 좋다. 
+
+\item 전역변수 
+
+전역변수 정의 위에 설명 comment 한 줄. 
+\begin{lstlisting}
+# GLOBAL_VARIABLE : explanation 
+GLOBAL_VARIABLE = ...
+\end{lstlisting}
+
+\end{compactitem}
+\end{compactitem}
+
+
+\subsection{Implementation}
+
+별지 첨부. 
+
+\section{기타}
+
+\subsection{Team Members}
+
+모든 사람 명단은 가나다순으로 쓰여졌음. 
+
+\begin{compactitem}
+\item 김동현
+
+서버세팅, 코딩 담당. 
+\item 김용현
+
+코딩, 야구 관련 지식 담당. 
+\item 신승우 
+
+문서화, 코딩 담당. 
+\item 이경수 
+
+문서화, 야구 관련 지식 담당. 
+\end{compactitem}
+
+\subsection{Project History}
+
+
+\paragraph{\textbf{2015.07.04 11:00-4:00}}
+
+\begin{compactitem}
+\item 참가자 : 김동현, 신승우, 이경수
+\item 한 일 : 전반적인 아키텍쳐 논의. 개발환경 협의. 서버 세팅.
+\item 합의사항 : 모임장소는 신촌 cafe.blog로 정함. 모임 시간은 매주 토요일 12:00까지 오기로. 
+\item 기타 : 없음. 
+\end{compactitem}
+
+\paragraph{\textbf{2015.07.11 11:00-4:00}}
+\begin{compactitem}
+\item 참가자 : 김동현, 신승우, 이경수
+\item 한 일 : 할 일 분배, pseudo-code implement하기. 
+\item 합의사항 : 스케쥴 정리 - 25일까지. 다음주 미팅 없음.  
+\item 각자 할 일 (due 25일)
+\begin{compactitem}
+\item 김동현 : 크롤러 짜보기 
+\item 김용현 : 파서 설계해서 pseudocode로 가져올것 
+\item 신승우 : 파서 설계/evalState 함수 짜오기/eventClass 짜오기
+\item 이경수 : 트레이드 정보 포함한 player list 만들기. 각자에게 배분해줄 것. 
+\end{compactitem}
+\item 기타 :  없음. 
+\end{compactitem}
+
+
+\paragraph{\textbf{2015.07.26 10:00-6:00}}
+\begin{compactitem}
+\item 참가자 : 김동현, 신승우, 이경수, 김용현
+\item 한 일 : crawler 작성, 스탯벡터 만드는 전처리 
+\item 합의사항 : Publish 방법 합의 - 후속결정사항 기록 필. 
+\item 각자 할 일 (due 1일)
+\begin{compactitem}
+\item 김동현 : (야구 기사 -> eventClass) Parser 설계 / 크롤러 디버깅
+\item 김용현 : (문자중계 -> eventClass) Parser 설계해서 pseudocode로 가져올것 / 수비스탯 합의해서 가져오기  
+\item 신승우 : (야구 기사 -> eventClass) Parser 설계/event handler 마무리 / 크롤러 디버깅 / 소스트리 
+\item 이경수 : 수비스탯 합의해서 가져오기 
+\end{compactitem}
+\item 기타 :  없음. 
+\end{compactitem}
+
+\paragraph{\textbf{2015.07.27} - publish 후속관련사항}
+\begin{compactitem}
+\item 참가자 : 외부회의 
+\item 합의사항 
+\begin{compactitem} 
+\item 일정 관련 : 2주 안에 1차적인 학습, 프로토타입 만들어보기. 리그 끝나기 전에 간단한 기사라도 만들어볼 것. 
+\item 저작권, 수익 : 공동분배. 비율은 차후 합의. 초창기 수익모델은 정해지지 않았음. 
+\item 기타 : 2주 후 회의. 
+\end{compactitem}
+\end{compactitem}
+
+
+\end{document}
